@@ -2,7 +2,7 @@
   "users": [
     {
       "id": "1",
-      "name": "Test",
+      "nama": "Test",
       "alamat": "Jln. Testing",
       "jenisKelamin": "Pria",
       "tanggalLahir": "3 Jan 2024",
@@ -10,11 +10,19 @@
     },
     {
       "id": "2",
-      "name": "Test 2",
+      "nama": "Test 2",
       "alamat": "Jln. Testing 2",
       "jenisKelamin": "Wanita",
       "tanggalLahir": "3 Jan 2024",
       "tanggalInput": "30 Mei 2024, 10:33"
+    },
+    {
+      "nama": "Hello",
+      "alamat": "asdasdsa",
+      "jenisKelamin": "Pria",
+      "tanggalLahir": "14 Mei 2024",
+      "tanggalInput": "30 Mei 2024, 12:09",
+      "id": "Nwjv6aD"
     }
   ]
 }
