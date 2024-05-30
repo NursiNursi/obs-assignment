@@ -22,6 +22,7 @@ import FormComponent from "./ui/FormComponent";
 import DetailComponent from "./ui/DetailComponent";
 import formatDateTime from "../util/formatDateTime";
 import formatDateTimeBorn from "../util/formatDateTimeBorn";
+import toast from "react-hot-toast";
 
 function UserList({ userData, fetchAllUsers, deleteUser, updateUser }) {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -74,6 +75,7 @@ function UserList({ userData, fetchAllUsers, deleteUser, updateUser }) {
       .then((data) => {
         updateUser(selectedUser.id, data);
         setShowEditModal(false);
+        toast.success("User successfully edited");
       })
       .catch((error) => {
         console.error("There was a problem with the fetch operation:", error);
@@ -97,6 +99,7 @@ function UserList({ userData, fetchAllUsers, deleteUser, updateUser }) {
           deleteUser(selectedUser.id);
         }
         setShowDeleteModal(false);
+        toast.success("User successfully deleted");
       })
       .catch((error) => {
         console.error("There was a problem with the fetch operation:", error);

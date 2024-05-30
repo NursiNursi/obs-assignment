@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { addUser } from "../redux/actions/userActions";
 import NewUserFormComponent from "./ui/NewUserFormComponent";
 import { AiFillPlusCircle } from "react-icons/ai";
+import toast from "react-hot-toast";
 
 const initialUserData = {
   nama: "",
@@ -64,6 +65,7 @@ const AddUser = ({ userData, addUser }) => {
         addUser(data);
         setShowAddModal(false);
         setnewUser(initialUserData);
+        toast.success("New user successfully added");
       })
       .catch((error) => {
         console.error("There was a problem with the fetch operation:", error);

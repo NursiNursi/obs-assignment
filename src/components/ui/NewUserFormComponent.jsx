@@ -8,7 +8,7 @@ export default function NewUserFormComponent({ newUser, setnewUser }) {
           <Form.Label>Nama</Form.Label>
           <Form.Control
             type="text"
-            placeholder="nama"
+            placeholder="Masukan Nama"
             name="nama"
             value={newUser.nama}
             onChange={(e) => setnewUser({ ...newUser, nama: e.target.value })}
@@ -19,7 +19,7 @@ export default function NewUserFormComponent({ newUser, setnewUser }) {
           <Form.Label>Alamat</Form.Label>
           <Form.Control
             type="alamat"
-            placeholder="alamat"
+            placeholder="Masukan Alamat"
             name="alamat"
             value={newUser.alamat}
             onChange={(e) => setnewUser({ ...newUser, alamat: e.target.value })}

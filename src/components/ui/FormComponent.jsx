@@ -5,15 +5,6 @@ export default function FormComponent({ selecteduser, setselecteduser }) {
     <div>
       <Form>
         <Form.Group className="mb-3">
-          <Form.Label>ID</Form.Label>
-          <Form.Control
-            type="number"
-            placeholder="name@example.com"
-            value={selecteduser.id}
-            disabled
-          />
-        </Form.Group>
-        <Form.Group className="mb-3">
           <Form.Label>Nama</Form.Label>
           <Form.Control
             type="text"
