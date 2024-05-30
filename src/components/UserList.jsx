@@ -1,13 +1,17 @@
 import { Col, Container, Row, Table } from "react-bootstrap";
 
-import { fetchAllUsers } from "../redux/actions/userActions";
-import { useEffect } from "react";
+import { deleteUser, fetchAllUsers } from "../redux/actions/userActions";
+import { useEffect, useState } from "react";
 import { AiFillDelete, AiFillEdit, AiFillEye } from "react-icons/ai";
 import { connect } from "react-redux";
 import AddUser from "./AddUser";
+import ModalComponent from "./ui/ModalComponent";
 
 // eslint-disable-next-line react-refresh/only-export-components
-function UserList({ userData, fetchAllUsers }) {
+function UserList({ userData, fetchAllUsers, deleteUser }) {
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [selectedUser, setSelectedUser] = useState(null);
+
   useEffect(() => {
     getAllUsers();
   }, []);
@@ -17,6 +21,29 @@ function UserList({ userData, fetchAllUsers }) {
       .then((response) => response.json())
       .then((data) => fetchAllUsers(data))
       .catch((error) => console.log(error));
+  };
+
+  const handleDelete = (userInfo) => {
+    setShowDeleteModal(true);
+    setSelectedUser(userInfo);
+  };
+
+  const confirmDelete = () => {
+    fetch(`http://localhost:3000/users/${selectedUser.id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        if (response.ok === true) {
+          deleteUser(selectedUser.id);
+        }
+        setShowDeleteModal(false);
+      })
+      .catch((error) => {
+        console.error("There was a problem with the fetch operation:", error);
+      });
   };
 
   return (
@@ -66,7 +93,7 @@ function UserList({ userData, fetchAllUsers }) {
                         </Col>
                         <Col>
                           <AiFillDelete
-                            // onClick={() => handleDelete(ele)}
+                            onClick={() => handleDelete(ele)}
                             color="red"
                             role="button"
                           />
@@ -80,6 +107,18 @@ function UserList({ userData, fetchAllUsers }) {
           </Col>
         </Row>
       </Container>
+
+      {showDeleteModal && (
+        <ModalComponent
+          showModal={showDeleteModal}
+          setShowModal={setShowDeleteModal}
+          confirmAction={confirmDelete}
+          title="Delete User"
+          content="Are you sure you want to delete this user ?"
+          confirmButtonText="Confirm"
+          cancelButtonText="Cancel"
+        />
+      )}
     </>
   );
 }
@@ -93,6 +132,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchAllUsers: (data) => dispatch(fetchAllUsers(data)),
+    deleteUser: (id) => dispatch(deleteUser(id)),
   };
 };
 
