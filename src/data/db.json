@@ -1,28 +1,12 @@
 {
   "users": [
     {
-      "id": "1",
-      "nama": "Test",
-      "alamat": "Jln. Testing",
+      "id": "5KP-yw1",
+      "nama": "Muhamad Nursi Ramdan",
+      "alamat": "Kp. Barulaksana RT.001/RW.014 Desa Jayagiri",
       "jenisKelamin": "Pria",
-      "tanggalLahir": "3 Jan 2024",
-      "tanggalInput": "30 Mei 2024, 10:33"
-    },
-    {
-      "id": "2",
-      "nama": "Test 2",
-      "alamat": "Jln. Testing 2",
-      "jenisKelamin": "Wanita",
-      "tanggalLahir": "3 Jan 2024",
-      "tanggalInput": "30 Mei 2024, 10:33"
-    },
-    {
-      "nama": "Hello",
-      "alamat": "asdasdsa",
-      "jenisKelamin": "Pria",
-      "tanggalLahir": "14 Mei 2024",
-      "tanggalInput": "30 Mei 2024, 12:09",
-      "id": "Nwjv6aD"
+      "tanggalLahir": "15 Mei 2024",
+      "tanggalInput": "31 Mei 2024, 01:40"
     }
   ]
 }
