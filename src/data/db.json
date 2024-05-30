@@ -7,6 +7,14 @@
       "jenisKelamin": "Pria",
       "tanggalLahir": "3 Jan 2024",
       "tanggalInput": "30 Mei 2024, 10:33"
+    },
+    {
+      "id": "2",
+      "name": "Test 2",
+      "alamat": "Jln. Testing 2",
+      "jenisKelamin": "Wanita",
+      "tanggalLahir": "3 Jan 2024",
+      "tanggalInput": "30 Mei 2024, 10:33"
     }
   ]
 }
