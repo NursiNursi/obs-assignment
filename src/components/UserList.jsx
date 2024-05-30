@@ -4,6 +4,7 @@ import { fetchAllUsers } from "../redux/actions/userActions";
 import { useEffect } from "react";
 import { AiFillDelete, AiFillEdit, AiFillEye } from "react-icons/ai";
 import { connect } from "react-redux";
+import AddUser from "./AddUser";
 
 // eslint-disable-next-line react-refresh/only-export-components
 function UserList({ userData, fetchAllUsers }) {
@@ -21,6 +22,9 @@ function UserList({ userData, fetchAllUsers }) {
   return (
     <>
       <Container>
+        <Row className="py-5 mt-5">
+          <AddUser />
+        </Row>
         <Row>
           <Col>
             <Table hover responsive="sm">
@@ -39,7 +43,7 @@ function UserList({ userData, fetchAllUsers }) {
                 {userData?.map((ele, index) => (
                   <tr key={ele.id}>
                     <td>{index + 1}</td>
-                    <td className="fw-bold">{ele.name}</td>
+                    <td className="fw-bold">{ele.nama}</td>
                     <td>{ele.alamat}</td>
                     <td>{ele.jenisKelamin}</td>
                     <td>{ele.tanggalLahir}</td>
