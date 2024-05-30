@@ -1,0 +1,12 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "name": "Test",
+      "alamat": "Jln. Testing",
+      "jenisKelamin": "Pria",
+      "tanggalLahir": "3 Jan 2024",
+      "tanggalInput": "30 Mei 2024, 10:33"
+    }
+  ]
+}
