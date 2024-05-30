@@ -1,4 +1,4 @@
-import { Col, Container, Row, Table } from "react-bootstrap";
+import { Button, Col, Container, Row, Table } from "react-bootstrap";
 
 import {
   deleteUser,
@@ -6,7 +6,7 @@ import {
   updateUser,
 } from "../redux/actions/userActions";
 import { useEffect, useState } from "react";
-import { AiFillDelete, AiFillEdit, AiFillEye } from "react-icons/ai";
+import { AiFillDelete, AiFillEdit, AiOutlineEye } from "react-icons/ai";
 import { connect } from "react-redux";
 import AddUser from "./AddUser";
 import ModalComponent from "./ui/ModalComponent";
@@ -142,29 +142,58 @@ function UserList({ userData, fetchAllUsers, deleteUser, updateUser }) {
                     <td>{ele.tanggalLahir}</td>
                     <td>{ele.tanggalInput}</td>
                     <td>
-                      <Row>
-                        <Col>
-                          <AiFillEye
-                            onClick={() => handleView(ele)}
-                            color="dodgerblue"
-                            role="button"
-                          />
-                        </Col>
-                        <Col>
-                          <AiFillEdit
+                      <div
+                        style={{
+                          display: "flex",
+                          gap: "5px",
+                        }}
+                      >
+                        <div>
+                          <Button onClick={() => handleView(ele)}>
+                            <div
+                              style={{ display: "flex", alignItems: "center" }}
+                            >
+                              <AiOutlineEye
+                                size={20}
+                                style={{ marginRight: "5px" }}
+                              />
+                              View
+                            </div>
+                          </Button>
+                        </div>
+                        <div>
+                          <Button
                             onClick={() => handleEdit(ele)}
-                            color="dodgerblue"
-                            role="button"
-                          />
-                        </Col>
-                        <Col>
-                          <AiFillDelete
+                            variant="outline-primary"
+                          >
+                            <div
+                              style={{ display: "flex", alignItems: "center" }}
+                            >
+                              <AiFillEdit
+                                size={20}
+                                style={{ marginRight: "5px" }}
+                              />
+                              Edit
+                            </div>
+                          </Button>
+                        </div>
+                        <div>
+                          <Button
                             onClick={() => handleDelete(ele)}
-                            color="red"
-                            role="button"
-                          />
-                        </Col>
-                      </Row>
+                            variant="outline-danger"
+                          >
+                            <div
+                              style={{ display: "flex", alignItems: "center" }}
+                            >
+                              <AiFillDelete
+                                size={20}
+                                style={{ marginRight: "5px" }}
+                              />
+                              Delete
+                            </div>
+                          </Button>
+                        </div>
+                      </div>
                     </td>
                   </tr>
                 ))}
