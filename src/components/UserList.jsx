@@ -1,23 +1,34 @@
-import { Button, Col, Container, Row, Table } from "react-bootstrap";
-
+import { useEffect, useState } from "react";
 import {
   deleteUser,
   fetchAllUsers,
   updateUser,
 } from "../redux/actions/userActions";
-import { useEffect, useState } from "react";
-import { AiFillDelete, AiFillEdit, AiOutlineEye } from "react-icons/ai";
 import { connect } from "react-redux";
+
+import {
+  Button,
+  Col,
+  Container,
+  Placeholder,
+  Row,
+  Table,
+} from "react-bootstrap";
+import { AiFillDelete, AiFillEdit, AiOutlineEye } from "react-icons/ai";
+
 import AddUser from "./AddUser";
 import ModalComponent from "./ui/ModalComponent";
 import FormComponent from "./ui/FormComponent";
 import DetailComponent from "./ui/DetailComponent";
+import formatDateTime from "../util/formatDateTime";
+import formatDateTimeBorn from "../util/formatDateTimeBorn";
 
 function UserList({ userData, fetchAllUsers, deleteUser, updateUser }) {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
   const [showViewModal, setShowViewModal] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     getAllUsers();
@@ -26,7 +37,10 @@ function UserList({ userData, fetchAllUsers, deleteUser, updateUser }) {
   const getAllUsers = () => {
     fetch("http://localhost:3000/users")
       .then((response) => response.json())
-      .then((data) => fetchAllUsers(data))
+      .then((data) => {
+        fetchAllUsers(data);
+        setIsLoading(false);
+      })
       .catch((error) => console.log(error));
   };
 
@@ -42,29 +56,6 @@ function UserList({ userData, fetchAllUsers, deleteUser, updateUser }) {
   };
 
   const confirmUpdate = () => {
-    const formatDateTime = (timestamp) => {
-      const formattedDate = new Date(timestamp).toLocaleDateString("in-US", {
-        day: "numeric",
-        month: "short",
-        year: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
-        hour12: false,
-      });
-
-      return formattedDate.replace("pukul ", "").replace(".", ":");
-    };
-
-    const formatDateTimeBorn = (timestamp) => {
-      const formattedDate = new Date(timestamp).toLocaleDateString("in-US", {
-        day: "numeric",
-        month: "short",
-        year: "numeric",
-      });
-
-      return formattedDate;
-    };
-
     fetch(`http://localhost:3000/users/${selectedUser.id}`, {
       method: "PUT",
       headers: {
@@ -151,7 +142,10 @@ function UserList({ userData, fetchAllUsers, deleteUser, updateUser }) {
                         <div>
                           <Button onClick={() => handleView(ele)}>
                             <div
-                              style={{ display: "flex", alignItems: "center" }}
+                              style={{
+                                display: "flex",
+                                alignItems: "center",
+                              }}
                             >
                               <AiOutlineEye
                                 size={20}
@@ -167,7 +161,10 @@ function UserList({ userData, fetchAllUsers, deleteUser, updateUser }) {
                             variant="outline-primary"
                           >
                             <div
-                              style={{ display: "flex", alignItems: "center" }}
+                              style={{
+                                display: "flex",
+                                alignItems: "center",
+                              }}
                             >
                               <AiFillEdit
                                 size={20}
@@ -183,7 +180,10 @@ function UserList({ userData, fetchAllUsers, deleteUser, updateUser }) {
                             variant="outline-danger"
                           >
                             <div
-                              style={{ display: "flex", alignItems: "center" }}
+                              style={{
+                                display: "flex",
+                                alignItems: "center",
+                              }}
                             >
                               <AiFillDelete
                                 size={20}
@@ -199,6 +199,14 @@ function UserList({ userData, fetchAllUsers, deleteUser, updateUser }) {
                 ))}
               </tbody>
             </Table>
+            {isLoading && (
+              <Placeholder animation="glow">
+                <Placeholder xs={12} size="lg" />
+                <Placeholder xs={12} size="lg" />
+                <Placeholder xs={12} size="lg" />
+                <Placeholder xs={12} size="lg" />
+              </Placeholder>
+            )}
           </Col>
         </Row>
       </Container>
