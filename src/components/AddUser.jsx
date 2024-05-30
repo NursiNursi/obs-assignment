@@ -45,11 +45,6 @@ const AddUser = ({ userData, addUser }) => {
       return formattedDate;
     };
 
-    // Example usage:
-    // const timestamp = Date.now(); // Replace with your actual timestamp
-    // const formattedOutput = formatDateTime(timestamp);
-    // console.log(formattedOutput); // Output: "30 Mei 2024 09:46"
-
     fetch(`http://localhost:3000/users`, {
       method: "POST",
       headers: {

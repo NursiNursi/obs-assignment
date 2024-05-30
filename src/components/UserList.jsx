@@ -240,5 +240,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-// eslint-disable-next-line react-refresh/only-export-components
 export default connect(mapStateToProps, mapDispatchToProps)(UserList);
