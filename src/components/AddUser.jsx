@@ -6,6 +6,7 @@ import { addUser } from "../redux/actions/userActions";
 import NewUserFormComponent from "./ui/NewUserFormComponent";
 import { AiFillPlusCircle } from "react-icons/ai";
 import toast from "react-hot-toast";
+import formatDateTime from "../util/formatDateTime";
 
 const initialUserData = {
   name: "",
@@ -23,19 +24,6 @@ const AddUser = ({ userData, addUser }) => {
   };
 
   const confirmAdd = () => {
-    const formatDateTime = (timestamp) => {
-      const formattedDate = new Date(timestamp).toLocaleDateString("in-US", {
-        day: "numeric",
-        month: "short",
-        year: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
-        hour12: false,
-      });
-
-      return formattedDate.replace("pukul ", "").replace(".", ":");
-    };
-
     fetch(`http://localhost:3000/users`, {
       method: "POST",
       headers: {
