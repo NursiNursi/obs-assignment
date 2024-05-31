@@ -1,9 +1,16 @@
-import { Form } from "react-bootstrap";
+import { Form, Image } from "react-bootstrap";
 
-export default function DetailComponent({ selecteduser }) {
+export default function DetailComponent({ selecteduser, imageUrl }) {
   return (
     <div>
       <Form>
+        <Form.Group className="mb-3 text-center">
+          <Image
+            src={imageUrl}
+            roundedCircle
+            style={{ width: "200px", height: "200px" }}
+          />
+        </Form.Group>
         <Form.Group className="mb-3">
           <Form.Label>Name</Form.Label>
           <Form.Control

@@ -232,10 +232,7 @@ function UserList({ userData, fetchAllUsers, deleteUser, updateUser }) {
           confirmButtonText="OK"
           cancelButtonText="Cancel"
           content={
-            <DetailComponent
-              selecteduser={selectedUser}
-              setselecteduser={setSelectedUser}
-            />
+            <DetailComponent selecteduser={selectedUser} imageUrl={imageUrl} />
           }
           showButton={false}
         />
