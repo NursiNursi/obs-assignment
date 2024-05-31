@@ -74,7 +74,7 @@ const AddUser = ({ userData, addUser }) => {
           content={
             <NewUserFormComponent newUser={newUser} setnewUser={setnewUser} />
           }
-          confirmButtonText="Update"
+          confirmButtonText="Create"
           cancelButtonText="Cancel"
           isConfirmDisabled={newUser.name === "" || newUser.address === ""}
         />
