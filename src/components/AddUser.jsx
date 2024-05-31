@@ -8,11 +8,10 @@ import { AiFillPlusCircle } from "react-icons/ai";
 import toast from "react-hot-toast";
 
 const initialUserData = {
-  nama: "",
-  alamat: "",
-  jenisKelamin: "Pria",
-  tanggalLahir: "",
-  tanggalInput: "",
+  name: "",
+  address: "",
+  gender: "Male",
+  inputDate: "",
 };
 
 const AddUser = ({ userData, addUser }) => {
@@ -37,27 +36,16 @@ const AddUser = ({ userData, addUser }) => {
       return formattedDate.replace("pukul ", "").replace(".", ":");
     };
 
-    const formatDateTimeBorn = (timestamp) => {
-      const formattedDate = new Date(timestamp).toLocaleDateString("in-US", {
-        day: "numeric",
-        month: "short",
-        year: "numeric",
-      });
-
-      return formattedDate;
-    };
-
     fetch(`http://localhost:3000/users`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        nama: newUser.nama,
-        alamat: newUser.alamat,
-        jenisKelamin: newUser.jenisKelamin,
-        tanggalLahir: formatDateTimeBorn(newUser.tanggalLahir),
-        tanggalInput: formatDateTime(Date.now()),
+        name: newUser.name,
+        address: newUser.address,
+        gender: newUser.gender,
+        inputDate: formatDateTime(Date.now()),
       }),
     })
       .then((response) => response.json())
@@ -100,7 +88,7 @@ const AddUser = ({ userData, addUser }) => {
           }
           confirmButtonText="Update"
           cancelButtonText="Cancel"
-          isConfirmDisabled={newUser.nama === "" || newUser.alamat === ""}
+          isConfirmDisabled={newUser.name === "" || newUser.address === ""}
         />
       )}
     </>

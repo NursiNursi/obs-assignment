@@ -5,40 +5,40 @@ export default function FormComponent({ selecteduser, setselecteduser }) {
     <div>
       <Form>
         <Form.Group className="mb-3">
-          <Form.Label>Nama</Form.Label>
+          <Form.Label>Name</Form.Label>
           <Form.Control
             type="text"
             placeholder="name"
             name="name"
-            value={selecteduser.nama}
+            value={selecteduser.name}
             onChange={(e) =>
-              setselecteduser({ ...selecteduser, nama: e.target.value })
+              setselecteduser({ ...selecteduser, name: e.target.value })
             }
           />
         </Form.Group>
         <Form.Group className="mb-3">
-          <Form.Label>Alamat</Form.Label>
+          <Form.Label>Address</Form.Label>
           <Form.Control
-            type="alamat"
-            placeholder="alamat"
-            name="alamat"
-            value={selecteduser.alamat}
+            type="address"
+            placeholder="address"
+            name="address"
+            value={selecteduser.address}
             onChange={(e) =>
-              setselecteduser({ ...selecteduser, alamat: e.target.value })
+              setselecteduser({ ...selecteduser, address: e.target.value })
             }
           />
         </Form.Group>
 
         <Form.Group className="mb-3">
-          <Form.Label>Jenis Kelamin</Form.Label>
+          <Form.Label>Gender</Form.Label>
           <div>
             <Form.Check
               type="radio"
-              id="pria"
+              id="male"
               name="jenisKelamin"
-              value="Pria"
-              label="Pria"
-              checked={selecteduser.jenisKelamin === "Pria"}
+              value="Male"
+              label="Male"
+              checked={selecteduser.gender === "Male"}
               onChange={(e) =>
                 setselecteduser({
                   ...selecteduser,
@@ -48,34 +48,19 @@ export default function FormComponent({ selecteduser, setselecteduser }) {
             />
             <Form.Check
               type="radio"
-              id="wanita"
+              id="female"
               name="jenisKelamin"
-              value="Wanita"
-              label="Wanita"
-              checked={selecteduser.jenisKelamin === "Wanita"}
+              value="Female"
+              label="Female"
+              checked={selecteduser.jenisKelamin === "Female"}
               onChange={(e) =>
                 setselecteduser({
                   ...selecteduser,
-                  jenisKelamin: e.target.value,
+                  gender: e.target.value,
                 })
               }
             />
           </div>
-        </Form.Group>
-
-        <Form.Group className="mb-3">
-          <Form.Label>Tanggal Lahir</Form.Label>
-          <Form.Control
-            type="date"
-            name="tanggalLahir"
-            value={selecteduser.tanggalLahir}
-            onChange={(e) =>
-              setselecteduser({
-                ...selecteduser,
-                tanggalLahir: e.target.value,
-              })
-            }
-          />
         </Form.Group>
       </Form>
     </div>

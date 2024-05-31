@@ -21,7 +21,6 @@ import ModalComponent from "./ui/ModalComponent";
 import FormComponent from "./ui/FormComponent";
 import DetailComponent from "./ui/DetailComponent";
 import formatDateTime from "../util/formatDateTime";
-import formatDateTimeBorn from "../util/formatDateTimeBorn";
 import toast from "react-hot-toast";
 
 function UserList({ userData, fetchAllUsers, deleteUser, updateUser }) {
@@ -64,11 +63,10 @@ function UserList({ userData, fetchAllUsers, deleteUser, updateUser }) {
       },
       body: JSON.stringify({
         id: selectedUser.id,
-        nama: selectedUser.nama,
-        alamat: selectedUser.alamat,
-        jenisKelamin: selectedUser.jenisKelamin,
-        tanggalLahir: formatDateTimeBorn(selectedUser.tanggalLahir),
-        tanggalInput: formatDateTime(Date.now()),
+        name: selectedUser.name,
+        address: selectedUser.address,
+        gender: selectedUser.gender,
+        inputDate: formatDateTime(Date.now()),
       }),
     })
       .then((response) => response.json())
@@ -118,23 +116,21 @@ function UserList({ userData, fetchAllUsers, deleteUser, updateUser }) {
               <thead>
                 <tr>
                   <th>No</th>
-                  <th>Nama</th>
-                  <th>Alamat</th>
-                  <th>Jenis Kelamin</th>
-                  <th>Tanggal Lahir</th>
-                  <th>Tanggal Input</th>
-                  <th>Aksi</th>
+                  <th>Name</th>
+                  <th>Address</th>
+                  <th>Gender</th>
+                  <th>Input Date</th>
+                  <th>Action</th>
                 </tr>
               </thead>
               <tbody>
                 {userData?.map((ele, index) => (
                   <tr key={ele.id}>
                     <td>{index + 1}</td>
-                    <td className="fw-bold">{ele.nama}</td>
-                    <td>{ele.alamat}</td>
-                    <td>{ele.jenisKelamin}</td>
-                    <td>{ele.tanggalLahir}</td>
-                    <td>{ele.tanggalInput}</td>
+                    <td className="fw-bold">{ele.name}</td>
+                    <td>{ele.address}</td>
+                    <td>{ele.gender}</td>
+                    <td>{ele.inputDate}</td>
                     <td>
                       <div
                         style={{
@@ -246,7 +242,7 @@ function UserList({ userData, fetchAllUsers, deleteUser, updateUser }) {
           confirmButtonText="Update"
           cancelButtonText="Cancel"
           isConfirmDisabled={
-            selectedUser.name === "" || selectedUser.alamat === ""
+            selectedUser.name === "" || selectedUser.address === ""
           }
         />
       )}
