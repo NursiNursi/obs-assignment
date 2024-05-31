@@ -22,6 +22,7 @@ import FormComponent from "./ui/FormComponent";
 import DetailComponent from "./ui/DetailComponent";
 import formatDateTime from "../util/formatDateTime";
 import toast from "react-hot-toast";
+import { fetchUserImage } from "../service/api";
 
 function UserList({ userData, fetchAllUsers, deleteUser, updateUser }) {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -33,25 +34,8 @@ function UserList({ userData, fetchAllUsers, deleteUser, updateUser }) {
 
   useEffect(() => {
     getAllUsers();
-    fetchUserImage();
+    fetchUserImage(setImageUrl);
   }, []);
-
-  const fetchUserImage = () => {
-    fetch("https://picsum.photos/200/300")
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.blob();
-      })
-      .then((blob) => {
-        const imageUrl = URL.createObjectURL(blob);
-        setImageUrl(imageUrl);
-      })
-      .catch((error) => {
-        console.error("There was a problem with the fetch operation:", error);
-      });
-  };
 
   const getAllUsers = () => {
     fetch("http://localhost:3000/users")
