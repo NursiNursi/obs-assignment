@@ -15,15 +15,18 @@ import {
   Table,
 } from "react-bootstrap";
 import { AiFillDelete, AiFillEdit, AiOutlineEye } from "react-icons/ai";
-import toast from "react-hot-toast";
 
 import AddUser from "./AddUser";
 import ModalComponent from "./ui/ModalComponent";
 import FormComponent from "./ui/FormComponent";
 import DetailComponent from "./ui/DetailComponent";
 
-import { fetchUserImage } from "../service/api";
-import { formatDateTime } from "../util/formatDateTime";
+import {
+  confirmDelete,
+  confirmUpdate,
+  fetchUserImage,
+  getAllUsers,
+} from "../service/api";
 
 function UserList({ userData, fetchAllUsers, deleteUser, updateUser }) {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -32,16 +35,6 @@ function UserList({ userData, fetchAllUsers, deleteUser, updateUser }) {
   const [selectedUser, setSelectedUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [imageUrl, setImageUrl] = useState("");
-
-  const getAllUsers = () => {
-    fetch("http://localhost:3000/users")
-      .then((response) => response.json())
-      .then((data) => {
-        fetchAllUsers(data);
-        setIsLoading(false);
-      })
-      .catch((error) => console.log(error));
-  };
 
   const handleView = (userInfo) => {
     setShowViewModal(true);
@@ -54,57 +47,13 @@ function UserList({ userData, fetchAllUsers, deleteUser, updateUser }) {
     setSelectedUser(userInfo);
   };
 
-  const confirmUpdate = () => {
-    fetch(`http://localhost:3000/users/${selectedUser.id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        id: selectedUser.id,
-        name: selectedUser.name,
-        address: selectedUser.address,
-        gender: selectedUser.gender,
-        inputDate: formatDateTime(Date.now()),
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        updateUser(selectedUser.id, data);
-        setShowEditModal(false);
-        toast.success("User successfully edited");
-      })
-      .catch((error) => {
-        console.error("There was a problem with the fetch operation:", error);
-      });
-  };
-
   const handleDelete = (userInfo) => {
     setShowDeleteModal(true);
     setSelectedUser(userInfo);
   };
 
-  const confirmDelete = () => {
-    fetch(`http://localhost:3000/users/${selectedUser.id}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => {
-        if (response.ok === true) {
-          deleteUser(selectedUser.id);
-        }
-        setShowDeleteModal(false);
-        toast.success("User successfully deleted");
-      })
-      .catch((error) => {
-        console.error("There was a problem with the fetch operation:", error);
-      });
-  };
-
   useEffect(() => {
-    getAllUsers();
+    getAllUsers(fetchAllUsers, setIsLoading);
     fetchUserImage(setImageUrl);
   }, []);
 
@@ -243,7 +192,9 @@ function UserList({ userData, fetchAllUsers, deleteUser, updateUser }) {
         <ModalComponent
           showModal={showEditModal}
           setShowModal={setShowEditModal}
-          confirmAction={confirmUpdate}
+          confirmAction={() =>
+            confirmUpdate(selectedUser, setShowEditModal, updateUser)
+          }
           title="Edit User"
           content={
             <FormComponent
@@ -263,7 +214,9 @@ function UserList({ userData, fetchAllUsers, deleteUser, updateUser }) {
         <ModalComponent
           showModal={showDeleteModal}
           setShowModal={setShowDeleteModal}
-          confirmAction={confirmDelete}
+          confirmAction={() =>
+            confirmDelete(selectedUser, deleteUser, setShowDeleteModal)
+          }
           title="Delete User"
           content="Are you sure you want to delete this user ?"
           confirmButtonText="Confirm"
