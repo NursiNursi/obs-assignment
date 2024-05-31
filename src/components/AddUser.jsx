@@ -1,12 +1,14 @@
 import { useState } from "react";
-import { Button, Col } from "react-bootstrap";
-import ModalComponent from "./ui/ModalComponent";
-import { connect } from "react-redux";
 import { addUser } from "../redux/actions/userActions";
-import NewUserFormComponent from "./ui/NewUserFormComponent";
+import { connect } from "react-redux";
+
+import { Button, Col } from "react-bootstrap";
 import { AiFillPlusCircle } from "react-icons/ai";
 import toast from "react-hot-toast";
-import formatDateTime from "../util/formatDateTime";
+
+import ModalComponent from "./ui/ModalComponent";
+import NewUserFormComponent from "./ui/NewUserFormComponent";
+import { formatDateTime } from "../util/formatDateTime";
 
 const initialUserData = {
   name: "",

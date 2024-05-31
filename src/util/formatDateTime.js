@@ -1,4 +1,4 @@
-export default function formatDateTime(timestamp) {
+export function formatDateTime(timestamp) {
   const formattedDate = new Date(timestamp).toLocaleDateString("in-US", {
     day: "numeric",
     month: "short",

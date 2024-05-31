@@ -15,14 +15,15 @@ import {
   Table,
 } from "react-bootstrap";
 import { AiFillDelete, AiFillEdit, AiOutlineEye } from "react-icons/ai";
+import toast from "react-hot-toast";
 
 import AddUser from "./AddUser";
 import ModalComponent from "./ui/ModalComponent";
 import FormComponent from "./ui/FormComponent";
 import DetailComponent from "./ui/DetailComponent";
-import formatDateTime from "../util/formatDateTime";
-import toast from "react-hot-toast";
+
 import { fetchUserImage } from "../service/api";
+import { formatDateTime } from "../util/formatDateTime";
 
 function UserList({ userData, fetchAllUsers, deleteUser, updateUser }) {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -31,11 +32,6 @@ function UserList({ userData, fetchAllUsers, deleteUser, updateUser }) {
   const [selectedUser, setSelectedUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [imageUrl, setImageUrl] = useState("");
-
-  useEffect(() => {
-    getAllUsers();
-    fetchUserImage(setImageUrl);
-  }, []);
 
   const getAllUsers = () => {
     fetch("http://localhost:3000/users")
@@ -106,6 +102,11 @@ function UserList({ userData, fetchAllUsers, deleteUser, updateUser }) {
         console.error("There was a problem with the fetch operation:", error);
       });
   };
+
+  useEffect(() => {
+    getAllUsers();
+    fetchUserImage(setImageUrl);
+  }, []);
 
   return (
     <>

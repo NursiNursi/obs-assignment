@@ -1,4 +1,4 @@
-export default function formatDateTimeBorn(timestamp) {
+export function formatDateTimeBorn(timestamp) {
   const formattedDate = new Date(timestamp).toLocaleDateString("in-US", {
     day: "numeric",
     month: "short",
