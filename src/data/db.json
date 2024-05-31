@@ -2,11 +2,10 @@
   "users": [
     {
       "id": "5KP-yw1",
-      "nama": "Muhamad Nursi Ramdan",
-      "alamat": "Kp. Barulaksana RT.001/RW.014 Desa Jayagiri",
-      "jenisKelamin": "Pria",
-      "tanggalLahir": "15 Mei 2024",
-      "tanggalInput": "31 Mei 2024, 01:40"
+      "name": "Muhamad Nursi Ramdan",
+      "address": "Kp. Barulaksana RT.001/RW.014 Desa Jayagiri Updates",
+      "gender": "Male",
+      "inputDate": "31 Mei 2024, 12:25"
     }
   ]
 }

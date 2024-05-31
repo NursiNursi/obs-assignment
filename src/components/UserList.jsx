@@ -29,10 +29,29 @@ function UserList({ userData, fetchAllUsers, deleteUser, updateUser }) {
   const [showViewModal, setShowViewModal] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [imageUrl, setImageUrl] = useState("");
 
   useEffect(() => {
     getAllUsers();
+    fetchUserImage();
   }, []);
+
+  const fetchUserImage = () => {
+    fetch("https://picsum.photos/200/300")
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.blob();
+      })
+      .then((blob) => {
+        const imageUrl = URL.createObjectURL(blob);
+        setImageUrl(imageUrl);
+      })
+      .catch((error) => {
+        console.error("There was a problem with the fetch operation:", error);
+      });
+  };
 
   const getAllUsers = () => {
     fetch("http://localhost:3000/users")
@@ -127,7 +146,18 @@ function UserList({ userData, fetchAllUsers, deleteUser, updateUser }) {
                 {userData?.map((ele, index) => (
                   <tr key={ele.id}>
                     <td>{index + 1}</td>
-                    <td className="fw-bold">{ele.name}</td>
+                    <td className="fw-bold">
+                      <img
+                        src={imageUrl}
+                        style={{
+                          width: "30px",
+                          height: "30px",
+                          marginRight: "8px",
+                          borderRadius: "15px",
+                        }}
+                      />
+                      <span>{ele.name}</span>
+                    </td>
                     <td>{ele.address}</td>
                     <td>{ele.gender}</td>
                     <td>{ele.inputDate}</td>
