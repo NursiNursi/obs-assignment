@@ -35,24 +35,24 @@ export default function FormComponent({ selecteduser, setselecteduser }) {
             <Form.Check
               type="radio"
               id="male"
-              name="jenisKelamin"
+              name="gender"
               value="Male"
               label="Male"
               checked={selecteduser.gender === "Male"}
               onChange={(e) =>
                 setselecteduser({
                   ...selecteduser,
-                  jenisKelamin: e.target.value,
+                  gender: e.target.value,
                 })
               }
             />
             <Form.Check
               type="radio"
               id="female"
-              name="jenisKelamin"
+              name="gender"
               value="Female"
               label="Female"
-              checked={selecteduser.jenisKelamin === "Female"}
+              checked={selecteduser.gender === "Female"}
               onChange={(e) =>
                 setselecteduser({
                   ...selecteduser,
